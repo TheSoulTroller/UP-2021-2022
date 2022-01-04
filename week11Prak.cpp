@@ -3,15 +3,15 @@ using namespace std;
 
 void printStr(char *str);
 void strcpy(char *str, char *strCopy);
-void strcat(char *str1, char *str2);
+char* strcat(char *str1, char *str2);
 int strlen(char *str);
 int strcmp(char *str1, char *str2);
 void reverse(char *str, int size);
 void replace(char *str);
 int find(char *str);
 int count(char *str);
-void substr(char *str);
-bool findSubstring(char* str, char* substr);
+char* substr(char *str);
+bool strstr(char* str, char* substr);
 
 int main()
 {
@@ -20,16 +20,20 @@ int main()
     cin >> sizeStr;
     char *str = new char[sizeStr + 1];
     cin.ignore();
+    cout << "Enter first string: ";
     cin.getline(str, sizeStr + 1);
 
+    // Не бива да се въвеждат повече символи от зададения размер!!!
+
     int sizeArr;
-    cout << "Enter size for the the second string: ";
+    cout << "Enter size for the second string: ";
     cin >> sizeArr;
     char *arr = new char[sizeArr + 1];
     cin.ignore();
+    cout << "Enter second string: ";
     cin.getline(arr, sizeArr + 1);
 
-    cout << boolalpha << findSubstring(str,arr);
+    
 
     delete[] str;
     delete[] arr;
@@ -76,7 +80,7 @@ void reverse(char *str, int size)
    } 
 }
 
-void strcat(char *str1, char *str2)
+char* strcat(char *str1, char *str2)
 {
     char *conc = new char[strlen(str1) + strlen(str2) + 1];
 
@@ -92,7 +96,8 @@ void strcat(char *str1, char *str2)
     i++;
     conc[i] = '\0';
 
-    printStr(conc);
+    return conc;
+
     delete [] conc;
 }
 
@@ -162,7 +167,7 @@ int count(char *str)
     return cnt;
 }
 
-void substr(char *str)
+char* substr(char *str)
 {
     int indexStart, indexEnd;
     cout << "Choose starting index: ";
@@ -208,12 +213,12 @@ void substr(char *str)
 
     subString[j] = '\0';
 
-    cout << subString;
+    return subString;
 
     delete[] subString;
 }
 
-bool findSubstring(char* str, char* substr)
+bool strstr(char* str, char* substr)
 {
     int i = 0, j = 0;
     while ((*(str + j) != '\0') && (*(substr + i) != '\0'))
